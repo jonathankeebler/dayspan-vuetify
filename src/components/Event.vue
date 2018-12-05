@@ -200,18 +200,28 @@
                   ></v-select>
                 </slot>
 
-				<!-- Custom -->
-				<v-select v-if="$dayspan.supports.custom && $dayspan.supports.custom.length"
-					v-for="custom in $dayspan.supports.custom"
-					:key="custom.id"
-                    single-line hide-details solo flat
-                    :prepend-icon="custom.icon"
-                    :items="custom.options"
-					:placeholder="custom.label"
+				        <!-- Custom -->
+                <div v-if="$dayspan.supports.custom && $dayspan.supports.custom.length"
+                  v-for="custom in $dayspan.supports.custom" :key="custom.id">
+                  <v-autocomplete 
+                    v-if="custom.autocomplete"
                     v-model="details[custom.id]"
-                  ></v-select>
+                    :items="custom.options" 
+                    :prepend-icon="custom.icon"
+                    :placeholder="custom.label"
+                    md-dense
+                    single-line hide-details solo flat
+                    :menu-props="custom.otherProps"
+                  />
+                  <v-select v-else
+                      single-line hide-details solo flat
+                      :prepend-icon="custom.icon"
+                      :items="custom.options"
+                      :placeholder="custom.label"
+                      v-model="details[custom.id]"
+                  />
+                </div>
                 <slot name="eventDetailsExtra" v-bind="slotData"></slot>
-
               </v-card-text>
             </v-card>
           </v-tab-item>
