@@ -72,6 +72,19 @@
 
       </slot>
 
+      <!-- Subtitle -->
+      <slot v-if="labels.subtitle" name="scheduleSubtitle" v-bind="{schedule, schedule, calendarEvent, details}">
+
+        <!-- class="ds-textfield ds-calendar-event-title" -->
+        <v-text-field single-line hide-details solo flat
+          class="ds-event-title"
+          :label="labels.subtitle"
+          :readonly="isReadOnly"
+          v-model="details.subtitle"
+        ></v-text-field>
+
+      </slot>
+
     </div>
 
     <div class="ds-event-body ds-event-area">
